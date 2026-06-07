@@ -16,6 +16,7 @@ public class UnitData : ScriptableObject
     [SerializeField] private int _damage;
     [SerializeField] private int _cost;
     [SerializeField] private int _reward;
+    [SerializeField] private int _sacrificeValue;
     [SerializeField] private UnitData _nextTierUnit;
 
     public string UnitName => _unitName;
@@ -26,5 +27,6 @@ public class UnitData : ScriptableObject
     public int Cost => _cost;
     public int Reward => _reward;
     public int Damage => _damage;
+    public int SacrificeValue => _sacrificeValue;
     public UnitData NextTierUnit => _nextTierUnit;
 }

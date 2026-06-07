@@ -16,6 +16,12 @@ public class GridModel
         OnGridChanged?.Invoke(x, y, unit);
     }
 
+    public void ClearCell(int x, int y)
+    {
+        _gridState[x, y] = null;
+        OnGridChanged?.Invoke(x, y, null);
+    }
+
     public void TryMoveOrMerge(int fromX, int fromY, int toX, int toY)
     {
         if (fromX == toX && fromY == toY) return;

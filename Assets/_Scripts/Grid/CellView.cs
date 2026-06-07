@@ -22,6 +22,7 @@ public class CellView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public event Action<CellView> OnDragStarted;
     public event Action<Vector2> OnDragging;
     public event Action<CellView> OnDroppedOver;
+    public event Action OnDragEnded;
 
     public void Initialize(int x, int y)
     {
@@ -55,6 +56,8 @@ public class CellView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         SetFaded(false);
+
+        OnDragEnded?.Invoke();
     }
 
     public void OnDrop(PointerEventData eventData)

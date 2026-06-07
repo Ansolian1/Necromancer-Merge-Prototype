@@ -22,4 +22,5 @@ MonoBehaviour:
   _damage: 2
   _cost: 5
   _reward: 0
+  _sacrificeValue: 3
   _nextTierUnit: {fileID: 11400000, guid: f10430816295afd4ba916e1de98ee960, type: 2}

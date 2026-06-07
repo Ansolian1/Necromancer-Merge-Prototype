@@ -30,6 +30,7 @@ public class GridView : MonoBehaviour
                 cell.OnDragStarted += HandleDragStart;
                 cell.OnDragging += HandleDragging;
                 cell.OnDroppedOver += HandleDrop;
+                cell.OnDragEnded += HandleDragEnd;
                 index++;
             }
         }
@@ -67,6 +68,11 @@ public class GridView : MonoBehaviour
             }
             _draggedCell = null;
         }
+    }
+
+    private void HandleDragEnd()
+    {
+        _dragGhostImage.gameObject.SetActive(false);
     }
 
     public void UpdateUISlot(int x, int y, Sprite icon)

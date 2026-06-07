@@ -25,4 +25,5 @@ MonoBehaviour:
   _damage: 4
   _cost: 0
   _reward: 15
+  _sacrificeValue: 7
   _nextTierUnit: {fileID: 0}

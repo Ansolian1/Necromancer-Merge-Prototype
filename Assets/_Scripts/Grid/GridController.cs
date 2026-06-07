@@ -4,21 +4,37 @@ public class GridController
 {
     private GridModel _model;
     private GridView _view;
+    private TrashZoneView _trashZone;
     private IAudioService _audio;
     private IVfxService _vfxSystem;
     private IWalletService _wallet;
-    public GridController(GridModel model, GridView view, IAudioService audio, IVfxService vfxSystem, IWalletService walletSystem)
+    public GridController(GridModel model, GridView view, TrashZoneView trashZone, IAudioService audio, IVfxService vfxSystem, IWalletService walletSystem)
     {
         _model = model;
         _view = view;
         _audio = audio;
         _vfxSystem = vfxSystem;
         _wallet = walletSystem;
+        _trashZone = trashZone;
         _view.OnPlayerDraggedSlot += HandlePlayerInput;
         _model.OnGridChanged += UpdateView;
         _model.OnMergeSuccess += HandleMergeSuccess;
+        _trashZone.OnUnitSacrificed += HandleSacrifice;
     }
+    private void HandleSacrifice(CellView sacrificedCell)
+    {
+        int x = sacrificedCell.X;
+        int y = sacrificedCell.Y;
 
+        UnitData unit = _model.GetUnitAt(x, y);
+
+        if (unit != null)
+        {
+            _model.ClearCell(x, y);
+            _wallet.Add(unit.SacrificeValue);
+            _vfxSystem.PlayMergeVfx(_trashZone.transform.position);
+        }
+    }
     private void HandlePlayerInput(int fromX, int fromY, int toX, int toY)
     {
         _model.TryMoveOrMerge(fromX, fromY, toX, toY);
