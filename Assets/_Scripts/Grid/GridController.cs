@@ -38,7 +38,7 @@ public class GridController
         {
             _audio.PlaySFX(data.MergeSound);
         }
-        _wallet.Add(15);
+        _wallet.Add(data.Reward);
     }
 
     public void InitializeTopToBottom()

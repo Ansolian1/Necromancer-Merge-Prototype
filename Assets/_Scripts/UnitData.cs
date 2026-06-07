@@ -14,6 +14,8 @@ public class UnitData : ScriptableObject
     [SerializeField] private GameObject _prefab;
     [SerializeField] private int _baseHp;
     [SerializeField] private int _damage;
+    [SerializeField] private int _cost;
+    [SerializeField] private int _reward;
     [SerializeField] private UnitData _nextTierUnit;
 
     public string UnitName => _unitName;
@@ -21,6 +23,8 @@ public class UnitData : ScriptableObject
     public Sprite Icon => _icon;
     public GameObject Prefab => _prefab;
     public int BaseHp => _baseHp;
+    public int Cost => _cost;
+    public int Reward => _reward;
     public int Damage => _damage;
     public UnitData NextTierUnit => _nextTierUnit;
 }

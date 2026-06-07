@@ -1940,6 +1940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _summonButton: {fileID: 1501668303}
+  _summonButtonText: {fileID: 1997505758}
 --- !u!1 &1928456596
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,4 +23,6 @@ MonoBehaviour:
   _prefab: {fileID: 9196927430234240439, guid: c6897b5179151fe488961e366d885602, type: 3}
   _baseHp: 15
   _damage: 4
+  _cost: 0
+  _reward: 15
   _nextTierUnit: {fileID: 0}

@@ -20,4 +20,6 @@ MonoBehaviour:
   _prefab: {fileID: 4379234948528627962, guid: 7908e886c4e5e404ebe7d1f64956bca1, type: 3}
   _baseHp: 10
   _damage: 2
+  _cost: 5
+  _reward: 0
   _nextTierUnit: {fileID: 11400000, guid: f10430816295afd4ba916e1de98ee960, type: 2}
