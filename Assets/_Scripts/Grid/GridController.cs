@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 public class GridController
 {
@@ -8,7 +9,8 @@ public class GridController
     private IAudioService _audio;
     private IVfxService _vfxSystem;
     private IWalletService _wallet;
-    public GridController(GridModel model, GridView view, TrashZoneView trashZone, IAudioService audio, IVfxService vfxSystem, IWalletService walletSystem)
+    private FloatingText _floatingTextPrefab;
+    public GridController(GridModel model, GridView view, TrashZoneView trashZone, IAudioService audio, IVfxService vfxSystem, IWalletService walletSystem, FloatingText floatingTextPrefab)
     {
         _model = model;
         _view = view;
@@ -20,6 +22,7 @@ public class GridController
         _model.OnGridChanged += UpdateView;
         _model.OnMergeSuccess += HandleMergeSuccess;
         _trashZone.OnUnitSacrificed += HandleSacrifice;
+        _floatingTextPrefab = floatingTextPrefab;
     }
     private void HandleSacrifice(CellView sacrificedCell)
     {
@@ -54,8 +57,12 @@ public class GridController
         {
             _audio.PlaySFX(data.MergeSound);
         }
+        FloatingText popup = Object.Instantiate(_floatingTextPrefab, worldPos, Quaternion.identity, _view.transform);
+        popup.Animate($"+{data.Reward}", Color.green); // +5 летит вверх!
         _wallet.Add(data.Reward);
     }
+
+
 
     public void InitializeTopToBottom()
     {

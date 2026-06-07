@@ -15,6 +15,7 @@ public class GameSceneBootstrapper : MonoBehaviour
     [SerializeField] private WalletView _walletView;
     [SerializeField] private TrashZoneView _trashZoneView;
     [SerializeField] private BattleTransitionView _battleTransitionView;
+    [SerializeField] private FloatingText _floatingText;
 
     [Header("Тестовые Данные (SO)")]
     [SerializeField] private UnitData _testSkeleton;
@@ -42,7 +43,7 @@ public class GameSceneBootstrapper : MonoBehaviour
         _gridModel = new GridModel();
 
         Debug.Log("Инициализация Контроллеров (Связка Моделей и View)...");
-        _gridController = new GridController(_gridModel, _gridView, _trashZoneView, audioSystem, vfxSystem, walletSystem);
+        _gridController = new GridController(_gridModel, _gridView, _trashZoneView, audioSystem, vfxSystem, walletSystem, _floatingText);
         _summonController = new SummonController(_gridModel, _summonView, _testSkeleton, walletSystem);
 
         _battleTransitionView.Init(_gridModel);
