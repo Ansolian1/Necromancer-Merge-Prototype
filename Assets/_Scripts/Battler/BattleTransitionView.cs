@@ -23,6 +23,6 @@ public class BattleTransitionView : MonoBehaviour
 
         // б асдсыел: 
         // SceneManager.LoadScene("BattleScene");
-        // хкх SessionManager.StartBattle(myArmy);
+        // хкх BattleManager.StartBattle(myArmy);
     }
 }

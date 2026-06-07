@@ -15,8 +15,7 @@ public class CellView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [Tooltip("Объект-пустышка между картинкой и ячейкой.")]
     [SerializeField] private RectTransform _visualPivot;
 
-    [Header("Сок (Juice)")]
-    //[SerializeField] private ParticleSystem _vfxPrefab; // Раскомментируй, когда разберешься с партиклами
+    [Header("Анимации")]
     [SerializeField] private float _animDuration = 0.4f;
 
     public event Action<CellView> OnDragStarted;
@@ -44,7 +43,7 @@ public class CellView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Sprite GetSprite() => _iconImage.sprite;
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_iconImage.sprite == null) return; // Пустую клетку не тащим!
+        if (_iconImage.sprite == null) return;
         OnDragStarted?.Invoke(this);
     }
 
@@ -75,6 +74,5 @@ public class CellView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Sequence mergeSeq = DOTween.Sequence();
         mergeSeq.Append(_visualPivot.DOScale(new Vector3(1.2f, 1.2f, 1f), _animDuration * 0.4f).SetEase(Ease.OutQuad))
                 .Append(_visualPivot.DOScale(Vector3.one, _animDuration * 0.6f).SetEase(Ease.OutBounce));
-        // if (_vfxPrefab != null) { ... }
     }
 }

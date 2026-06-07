@@ -25,34 +25,32 @@ public class GameSceneBootstrapper : MonoBehaviour
 
     private async void Start()
     {
-        // ЗАЩИТА ОТ ДУРАКА: Если запустили GameScene напрямую, минуя InitScene
         if (!IsServiceLocatorReady())
             return;
 
-        Debug.Log("[GameBoot] Фаза 1: Получение глобальных сервисов...");
+        Debug.Log("Получение глобальных сервисов...");
         var saveSystem = ServiceLocator.Get<ISaveSystem>();
         var audioSystem = ServiceLocator.Get<IAudioService>();
         var vfxSystem = ServiceLocator.Get<IVfxService>();
         var walletSystem = ServiceLocator.Get<IWalletService>();
-        Debug.Log("[GameBoot] Фаза 2: Асинхронная загрузка сохранений уровня...");
-        // В реальной игре мы заменим тип `object` на наш класс сохранения, например GameSaveData
+        Debug.Log("Асинхронная загрузка сохранений уровня...");
         // object saveData = await saveSystem.LoadAsync<object>("main_save_key");
 
 
-        Debug.Log("[GameBoot] Фаза 3: Инициализация Моделей (Чистые данные)... ");
+        Debug.Log("Инициализация Моделей");
         //Тут будет передача из сохранений в модели
         _gridModel = new GridModel();
 
-        Debug.Log("[GameBoot] Фаза 4: Инициализация Контроллеров (Связка Моделей и View)...");
+        Debug.Log("Инициализация Контроллеров (Связка Моделей и View)...");
         _gridController = new GridController(_gridModel, _gridView, _trashZoneView, audioSystem, vfxSystem, walletSystem);
         _summonController = new SummonController(_gridModel, _summonView, _testSkeleton, walletSystem);
 
         _battleTransitionView.Init(_gridModel);
 
-        Debug.Log("[GameBoot] Фаза 5: Отрисовка стартового состояния и старт игры...");
+        Debug.Log("Отрисовка стартового состояния и старт игры...");
         _gridController.InitializeTopToBottom(); 
 
-        Debug.Log("<color=green>[GameBoot] Сцена успешно инициализирована!</color>");
+        Debug.Log("<color=green>[GameBoot] Сцена успешно инициализирована</color>");
     }
 
     /// <summary>
