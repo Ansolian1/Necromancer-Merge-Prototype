@@ -78,4 +78,30 @@ public class GridModel
         freeY = -1;
         return false;
     }
+    /// <summary>
+    /// Запаковывает всю доску в DTO (Посылку) для отправки в Автобатлер.
+    /// Пустые клетки игнорируются.
+    /// </summary>
+    public ArmyPackage ExportArmy()
+    {
+        ArmyPackage package = new ArmyPackage();
+        for (int x = 0; x < _gridState.GetLength(0); x++)
+        {
+            for (int y = 0; y < _gridState.GetLength(1); y++)
+            {
+                UnitData unit = _gridState[x, y];
+                if (unit != null)
+                {
+                    PackagedUnit packagedUnit = new PackagedUnit
+                    {
+                        Data = unit,
+                        GridX = x,
+                        GridY = y
+                    };
+                    package.AliveUnits.Add(packagedUnit);
+                }
+            }
+        }
+        return package;
+    }
 }

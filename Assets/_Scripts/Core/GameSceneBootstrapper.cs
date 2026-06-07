@@ -14,6 +14,7 @@ public class GameSceneBootstrapper : MonoBehaviour
     [SerializeField] private SummonPanelView _summonView;
     [SerializeField] private WalletView _walletView;
     [SerializeField] private TrashZoneView _trashZoneView;
+    [SerializeField] private BattleTransitionView _battleTransitionView;
 
     [Header("Тестовые Данные (SO)")]
     [SerializeField] private UnitData _testSkeleton;
@@ -45,6 +46,8 @@ public class GameSceneBootstrapper : MonoBehaviour
         Debug.Log("[GameBoot] Фаза 4: Инициализация Контроллеров (Связка Моделей и View)...");
         _gridController = new GridController(_gridModel, _gridView, _trashZoneView, audioSystem, vfxSystem, walletSystem);
         _summonController = new SummonController(_gridModel, _summonView, _testSkeleton, walletSystem);
+
+        _battleTransitionView.Init(_gridModel);
 
         Debug.Log("[GameBoot] Фаза 5: Отрисовка стартового состояния и старт игры...");
         _gridController.InitializeTopToBottom(); 
