@@ -6,7 +6,7 @@ public interface IVfxService
     void PlayMergeVfx(Vector3 position);
 }
 
-public class UnityVfxService : MonoBehaviour, IVfxService
+public class VfxService : MonoBehaviour, IVfxService
 {
     [SerializeField] private ParticleSystem _mergeVfxPrefab;
 

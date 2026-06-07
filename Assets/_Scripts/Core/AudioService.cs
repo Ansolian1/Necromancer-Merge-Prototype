@@ -5,7 +5,7 @@ public interface IAudioService
     void PlaySFX(AudioClip clip);
 }
 
-public class UnityAudioService : MonoBehaviour, IAudioService
+public class AudioService : MonoBehaviour, IAudioService
 {
     [SerializeField] private AudioSource _sfxSource;
 
