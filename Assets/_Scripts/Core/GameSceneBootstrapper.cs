@@ -12,6 +12,7 @@ public class GameSceneBootstrapper : MonoBehaviour
     [Space(10)]
     [SerializeField] private GridView _gridView;
     [SerializeField] private SummonPanelView _summonView;
+    [SerializeField] private WalletView _walletView;
 
     [Header("Тестовые Данные (SO)")]
     [SerializeField] private UnitData _testSkeleton;
@@ -30,6 +31,7 @@ public class GameSceneBootstrapper : MonoBehaviour
         var saveSystem = ServiceLocator.Get<ISaveSystem>();
         var audioSystem = ServiceLocator.Get<IAudioService>();
         var vfxSystem = ServiceLocator.Get<IVfxService>();
+        var walletSystem = ServiceLocator.Get<IWalletService>();
         Debug.Log("[GameBoot] Фаза 2: Асинхронная загрузка сохранений уровня...");
         // В реальной игре мы заменим тип `object` на наш класс сохранения, например GameSaveData
         // object saveData = await saveSystem.LoadAsync<object>("main_save_key");
@@ -40,8 +42,8 @@ public class GameSceneBootstrapper : MonoBehaviour
         _gridModel = new GridModel();
 
         Debug.Log("[GameBoot] Фаза 4: Инициализация Контроллеров (Связка Моделей и View)...");
-        _gridController = new GridController(_gridModel, _gridView, audioSystem, vfxSystem);
-        _summonController = new SummonController(_gridModel, _summonView, _testSkeleton);
+        _gridController = new GridController(_gridModel, _gridView, audioSystem, vfxSystem, walletSystem);
+        _summonController = new SummonController(_gridModel, _summonView, _testSkeleton, walletSystem);
 
         Debug.Log("[GameBoot] Фаза 5: Отрисовка стартового состояния и старт игры...");
         _gridController.InitializeTopToBottom(); 

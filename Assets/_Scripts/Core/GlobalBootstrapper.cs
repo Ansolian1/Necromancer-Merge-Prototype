@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class GlobalBootstrapper : MonoBehaviour
 {
     [Header("—ËÒÚÂÏ˚ (œÂÙ‡·˚)")]
-    [SerializeField] private UnityAudioService _audioServicePrefab;
-    [SerializeField] private UnityVfxService _vfxServicePrefab;
+    [SerializeField] private AudioService _audioServicePrefab;
+    [SerializeField] private VfxService _vfxServicePrefab;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class GlobalBootstrapper : MonoBehaviour
         // === ¿”ƒ»Œ —»—“≈Ã¿ ===
         if (_audioServicePrefab != null)
         {
-            UnityAudioService audioInstance = Instantiate(_audioServicePrefab);
+            AudioService audioInstance = Instantiate(_audioServicePrefab);
             DontDestroyOnLoad(audioInstance.gameObject);
             ServiceLocator.Register<IAudioService>(audioInstance);
         }
@@ -34,10 +34,14 @@ public class GlobalBootstrapper : MonoBehaviour
         // === VFX —»—“≈Ã¿ ===
         if (_vfxServicePrefab != null)
         {
-            UnityVfxService vfxInstance = Instantiate(_vfxServicePrefab);
+            VfxService vfxInstance = Instantiate(_vfxServicePrefab);
             DontDestroyOnLoad(vfxInstance.gameObject);
             ServiceLocator.Register<IVfxService>(vfxInstance);
         }
+
+        // === —»—“≈Ã¿  Œÿ≈À‹ ¿ ===
+        IWalletService walletSystem = new WalletService(45);
+        ServiceLocator.Register<IWalletService>(walletSystem);
     }
 
     private void LoadGameScene()

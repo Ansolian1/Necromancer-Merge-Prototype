@@ -6,12 +6,14 @@ public class GridController
     private GridView _view;
     private IAudioService _audio;
     private IVfxService _vfxSystem;
-    public GridController(GridModel model, GridView view, IAudioService audio, IVfxService vfxSystem)
+    private IWalletService _wallet;
+    public GridController(GridModel model, GridView view, IAudioService audio, IVfxService vfxSystem, IWalletService walletSystem)
     {
         _model = model;
         _view = view;
         _audio = audio;
         _vfxSystem = vfxSystem;
+        _wallet = walletSystem;
         _view.OnPlayerDraggedSlot += HandlePlayerInput;
         _model.OnGridChanged += UpdateView;
         _model.OnMergeSuccess += HandleMergeSuccess;
@@ -36,6 +38,7 @@ public class GridController
         {
             _audio.PlaySFX(data.MergeSound);
         }
+        _wallet.Add(15);
     }
 
     public void InitializeTopToBottom()
